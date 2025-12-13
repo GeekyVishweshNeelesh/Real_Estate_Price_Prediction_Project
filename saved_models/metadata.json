@@ -1,0 +1,69 @@
+{
+    "timestamp": "2025-12-13T05:42:00.806632",
+    "total_models": 6,
+    "classification_models": 3,
+    "regression_models": 3,
+    "training_samples": 8000,
+    "test_samples": 2000,
+    "feature_columns": [
+        "Size_in_SqFt",
+        "BHK",
+        "Price_per_SqFt",
+        "Nearby_Schools",
+        "Nearby_Hospitals",
+        "Parking_Space",
+        "Public_Transport_Accessibility"
+    ],
+    "scaler": "StandardScaler",
+    "models": {
+        "classification": {
+            "Model_1": {
+                "name": "Logistic Regression",
+                "path": "saved_models/model_1_logistic_regression.pkl",
+                "accuracy": 0.9335,
+                "precision": 0.93713163064833,
+                "recall": 0.9325513196480938,
+                "roc_auc": 0.9876794824462141
+            },
+            "Model_2": {
+                "name": "Random Forest Classifier",
+                "path": "saved_models/model_2_random_forest_classifier.pkl",
+                "accuracy": 0.99,
+                "precision": 0.994088669950739,
+                "recall": 0.9863147605083089,
+                "roc_auc": 0.9996798306304034
+            },
+            "Model_3": {
+                "name": "XGBoost Classifier",
+                "path": "saved_models/model_3_xgboost_classifier.pkl",
+                "accuracy": 0.996,
+                "precision": 0.9970617042115573,
+                "recall": 0.9951124144672532,
+                "roc_auc": 0.999908951835521
+            }
+        },
+        "regression": {
+            "Model_4": {
+                "name": "Linear Regression",
+                "path": "saved_models/model_4_linear_regression.pkl",
+                "r2": 0.9251611544275994,
+                "rmse": 41.46800627187211,
+                "mae": 30.94593980958309
+            },
+            "Model_5": {
+                "name": "Random Forest Regressor",
+                "path": "saved_models/model_5_random_forest_regressor.pkl",
+                "r2": 0.9867533134703877,
+                "rmse": 17.446296351630536,
+                "mae": 12.663935959517431
+            },
+            "Model_6": {
+                "name": "XGBoost Regressor",
+                "path": "saved_models/model_6_xgboost_regressor.pkl",
+                "r2": 0.9990104203018497,
+                "rmse": 4.768425526163775,
+                "mae": 3.5585748069637457
+            }
+        }
+    }
+}
