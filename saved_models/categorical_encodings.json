@@ -1,0 +1,195 @@
+{
+    "categorical_manual_mappings": {
+        "Good_Investment": {
+            "Yes": 1,
+            "No": 0,
+            "YES": 1,
+            "NO": 0,
+            "yes": 1,
+            "no": 0
+        },
+        "Risk_Level": {
+            "High": 2,
+            "Medium": 1,
+            "Low": 0,
+            "HIGH": 2,
+            "MEDIUM": 1,
+            "LOW": 0,
+            "high": 2,
+            "medium": 1,
+            "low": 0
+        },
+        "Area_Quality": {
+            "High": 2,
+            "Medium": 1,
+            "Low": 0,
+            "HIGH": 2,
+            "MEDIUM": 1,
+            "LOW": 0
+        },
+        "Market_Demand": {
+            "High": 2,
+            "Medium": 1,
+            "Low": 0,
+            "HIGH": 2,
+            "MEDIUM": 1,
+            "LOW": 0
+        },
+        "Price_Stability": {
+            "High": 2,
+            "Medium": 1,
+            "Low": 0,
+            "HIGH": 2,
+            "MEDIUM": 1,
+            "LOW": 0
+        },
+        "Has_Parking": {
+            "Yes": 1,
+            "No": 0
+        },
+        "Near_Metro": {
+            "Yes": 1,
+            "No": 0
+        },
+        "Good_Schools": {
+            "Yes": 1,
+            "No": 0
+        },
+        "Hospital_Nearby": {
+            "Yes": 1,
+            "No": 0
+        },
+        "Location": {
+            "North": 0,
+            "South": 1,
+            "East": 2,
+            "West": 3,
+            "Central": 4,
+            "NORTH": 0,
+            "SOUTH": 1,
+            "EAST": 2,
+            "WEST": 3,
+            "CENTRAL": 4
+        },
+        "Property_Type": {
+            "Apartment": 0,
+            "Villa": 1,
+            "Plot": 2,
+            "Townhouse": 3,
+            "Bungalow": 4,
+            "APARTMENT": 0,
+            "VILLA": 1,
+            "PLOT": 2
+        },
+        "Area_Type": {
+            "Urban": 0,
+            "Suburban": 1,
+            "Rural": 2,
+            "URBAN": 0,
+            "SUBURBAN": 1,
+            "RURAL": 2
+        }
+    },
+    "feature_information": {
+        "Size_in_SqFt": {
+            "type": "numeric",
+            "min": 500,
+            "max": 10000,
+            "unit": "sq feet",
+            "description": "Total area of property",
+            "importance": "Secondary (17.59%)"
+        },
+        "BHK": {
+            "type": "numeric",
+            "min": 1,
+            "max": 5,
+            "unit": "count",
+            "description": "Number of bedrooms",
+            "importance": "Secondary"
+        },
+        "Price_per_SqFt": {
+            "type": "numeric",
+            "min": 1000,
+            "max": 20000,
+            "unit": "INR",
+            "description": "Current market price per square foot",
+            "importance": "PRIMARY (82.01%)"
+        },
+        "Nearby_Schools": {
+            "type": "numeric",
+            "min": 0,
+            "max": 10,
+            "unit": "count",
+            "description": "Number of schools within 5km",
+            "importance": "<1%"
+        },
+        "Nearby_Hospitals": {
+            "type": "numeric",
+            "min": 0,
+            "max": 10,
+            "unit": "count",
+            "description": "Number of hospitals within 5km",
+            "importance": "<1%"
+        },
+        "Parking_Space": {
+            "type": "numeric",
+            "min": 0,
+            "max": 3,
+            "unit": "count",
+            "description": "Number of parking spaces",
+            "importance": "<1%"
+        },
+        "Public_Transport_Accessibility": {
+            "type": "numeric",
+            "min": 1,
+            "max": 5,
+            "unit": "scale",
+            "description": "Public transport accessibility (1=Poor, 5=Excellent)",
+            "importance": "<1%"
+        }
+    },
+    "feature_statistics": {
+        "Size_in_SqFt": {
+            "mean": 2500,
+            "min": 800,
+            "max": 5000,
+            "std": 1000
+        },
+        "BHK": {
+            "mean": 3,
+            "min": 1,
+            "max": 5,
+            "std": 1
+        },
+        "Price_per_SqFt": {
+            "mean": 6000,
+            "min": 2000,
+            "max": 10000,
+            "std": 2000
+        },
+        "Nearby_Schools": {
+            "mean": 4,
+            "min": 0,
+            "max": 10,
+            "std": 2
+        },
+        "Nearby_Hospitals": {
+            "mean": 3,
+            "min": 0,
+            "max": 10,
+            "std": 2
+        },
+        "Parking_Space": {
+            "mean": 1,
+            "min": 0,
+            "max": 3,
+            "std": 1
+        },
+        "Public_Transport_Accessibility": {
+            "mean": 3.5,
+            "min": 1,
+            "max": 5,
+            "std": 1
+        }
+    }
+}
