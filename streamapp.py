@@ -6,25 +6,23 @@ import json
 import warnings
 warnings.filterwarnings('ignore')
 
-# Set page configuration
+# Set page configuration (without theme parameter for compatibility)
 st.set_page_config(
     page_title="Real Estate Investment Advisor",
     page_icon="🏠",
     layout="wide",
-    initial_sidebar_state="expanded",
-    theme={
-        "primaryColor": "#FF6B35",
-        "backgroundColor": "#0E1117",
-        "secondaryBackgroundColor": "#1C1F26",
-        "textColor": "#FFFFFF",
-        "font": "sans serif"
-    }
+    initial_sidebar_state="expanded"
 )
 
 # Custom CSS styling - Dark theme with black background
 st.markdown("""
     <style>
     /* Main background */
+    html, body {
+        background-color: #0E1117;
+        color: #FFFFFF;
+    }
+    
     .main {
         background-color: #0E1117;
         padding: 2rem;
@@ -45,13 +43,13 @@ st.markdown("""
         color: #FFFFFF !important;
     }
     
-    p, label {
+    p, label, span {
         color: #E0E0E0 !important;
     }
     
     /* Metric cards */
     .stMetric {
-        background-color: #1C1F26;
+        background-color: #1C1F26 !important;
         padding: 1rem;
         border-radius: 0.5rem;
         border-left: 4px solid #FF6B35;
@@ -59,28 +57,41 @@ st.markdown("""
     }
     
     [data-testid="metric-container"] {
-        background-color: #1C1F26;
+        background-color: #1C1F26 !important;
         border-left: 4px solid #FF6B35;
         padding: 1rem;
         border-radius: 0.5rem;
     }
     
-    /* Input boxes */
-    .stNumberInput input, .stSlider input {
-        background-color: #1C1F26;
-        color: #FFFFFF;
+    [data-testid="stMetricValue"] {
+        color: #FFFFFF !important;
     }
     
-    [data-testid="stNumberInput"] input, [data-testid="stSlider"] input {
-        background-color: #1C1F26;
-        color: #FFFFFF;
+    [data-testid="stMetricLabel"] {
+        color: #E0E0E0 !important;
+    }
+    
+    /* Input boxes */
+    .stNumberInput input, 
+    .stSlider input,
+    input[type="number"],
+    input[type="range"] {
+        background-color: #1C1F26 !important;
+        color: #FFFFFF !important;
+        border: 1px solid #2D2E37 !important;
+    }
+    
+    [data-testid="stNumberInput"] input, 
+    [data-testid="stSlider"] input {
+        background-color: #1C1F26 !important;
+        color: #FFFFFF !important;
     }
     
     /* Buttons */
     .stButton > button {
-        background-color: #FF6B35;
-        color: #FFFFFF;
-        border: none;
+        background-color: #FF6B35 !important;
+        color: #FFFFFF !important;
+        border: none !important;
         border-radius: 0.5rem;
         font-weight: bold;
         padding: 0.5rem 1.5rem;
@@ -88,56 +99,69 @@ st.markdown("""
     }
     
     .stButton > button:hover {
-        background-color: #FF8A50;
-        box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+        background-color: #FF8A50 !important;
+        box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4) !important;
     }
     
     /* Radio buttons and checkboxes */
     [data-testid="stRadio"] {
-        color: #FFFFFF;
+        color: #FFFFFF !important;
+    }
+    
+    [data-testid="stRadio"] label {
+        color: #E0E0E0 !important;
     }
     
     /* Dividers */
     hr {
-        background-color: #2D2E37;
+        background-color: #2D2E37 !important;
     }
     
     /* Info boxes */
     [data-testid="stAlert"] {
-        background-color: #1C1F26;
-        color: #FFFFFF;
+        background-color: #1C1F26 !important;
+        color: #FFFFFF !important;
         border-radius: 0.5rem;
+        border-left: 4px solid #FF6B35;
     }
     
     /* Success box */
     .stSuccess {
-        background-color: #1B4332;
-        color: #FFFFFF;
-        border-left: 4px solid #2D6A4F;
+        background-color: #1B4332 !important;
+        color: #FFFFFF !important;
+        border-left: 4px solid #2D6A4F !important;
     }
     
     /* Error box */
     .stError {
-        background-color: #6A1B2C;
-        color: #FFFFFF;
-        border-left: 4px solid #A42B4A;
+        background-color: #6A1B2C !important;
+        color: #FFFFFF !important;
+        border-left: 4px solid #A42B4A !important;
     }
     
     /* Warning box */
     .stWarning {
-        background-color: #5A3C1F;
-        color: #FFFFFF;
-        border-left: 4px solid #8B5A2B;
+        background-color: #5A3C1F !important;
+        color: #FFFFFF !important;
+        border-left: 4px solid #8B5A2B !important;
     }
     
     /* DataFrames */
     .stDataFrame {
-        background-color: #1C1F26;
-        color: #FFFFFF;
+        background-color: #1C1F26 !important;
+        color: #FFFFFF !important;
     }
     
     [data-testid="stDataFrame"] {
-        background-color: #1C1F26;
+        background-color: #1C1F26 !important;
+    }
+    
+    .stDataFrame thead {
+        background-color: #2D2E37 !important;
+    }
+    
+    .stDataFrame tbody {
+        background-color: #1C1F26 !important;
     }
     
     /* Sidebar text */
@@ -153,18 +177,38 @@ st.markdown("""
         background-color: transparent;
     }
     
-    /* Cards/Containers */
+    /* Containers */
     .stContainer {
         background-color: transparent;
     }
     
-    /* Hide default Streamlit logo and elements */
-    #MainMenu {
-        visibility: hidden;
+    /* Subheader */
+    [data-testid="stMarkdownContainer"] {
+        color: #FFFFFF;
     }
     
-    footer {
-        visibility: hidden;
+    /* Slider styling */
+    .stSlider {
+        color: #FFFFFF;
+    }
+    
+    .stSlider label {
+        color: #E0E0E0 !important;
+    }
+    
+    /* Number input styling */
+    .stNumberInput label {
+        color: #E0E0E0 !important;
+    }
+    
+    /* Expander */
+    [data-testid="stExpander"] {
+        background-color: #1C1F26;
+        border: 1px solid #2D2E37;
+    }
+    
+    [data-testid="stExpander"] summary {
+        color: #FFFFFF !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -236,7 +280,7 @@ page = st.sidebar.radio(
 # ==================== PAGE 1: PROPERTY PREDICTION ====================
 
 if page == "🔮 Property Prediction":
-    st.subheader("Analyze Property Investment Potential", divider="orange")
+    st.subheader("Analyze Property Investment Potential")
     
     col1, col2 = st.columns(2)
     
@@ -323,7 +367,7 @@ if page == "🔮 Property Prediction":
     if st.button("🔍 Analyze Property", use_container_width=True, type="primary"):
         
         # Classification predictions (Good/Bad Investment)
-        st.subheader("📊 Investment Quality Predictions", divider="orange")
+        st.subheader("📊 Investment Quality Predictions")
         
         col_c1, col_c2, col_c3 = st.columns(3)
         
@@ -332,8 +376,7 @@ if page == "🔮 Property Prediction":
             st.metric(
                 "Model 1: Logistic",
                 f"{pred_1*100:.1f}%",
-                f"{'✅ Good' if pred_1 > 0.5 else '❌ Bad'}",
-                label_visibility="visible"
+                f"{'✅ Good' if pred_1 > 0.5 else '❌ Bad'}"
             )
         
         with col_c2:
@@ -341,8 +384,7 @@ if page == "🔮 Property Prediction":
             st.metric(
                 "Model 2: Random Forest",
                 f"{pred_2*100:.1f}%",
-                f"{'✅ Good' if pred_2 > 0.5 else '❌ Bad'}",
-                label_visibility="visible"
+                f"{'✅ Good' if pred_2 > 0.5 else '❌ Bad'}"
             )
         
         with col_c3:
@@ -350,14 +392,13 @@ if page == "🔮 Property Prediction":
             st.metric(
                 "Model 3: XGBoost ⭐",
                 f"{pred_3*100:.1f}%",
-                f"{'✅ Good' if pred_3 > 0.5 else '❌ Bad'}",
-                label_visibility="visible"
+                f"{'✅ Good' if pred_3 > 0.5 else '❌ Bad'}"
             )
         
         st.divider()
         
         # Regression predictions (5-Year Price)
-        st.subheader("💰 5-Year Price Forecast (in Lakhs)", divider="orange")
+        st.subheader("💰 5-Year Price Forecast (in Lakhs)")
         
         col_r1, col_r2, col_r3 = st.columns(3)
         
@@ -366,8 +407,7 @@ if page == "🔮 Property Prediction":
             st.metric(
                 "Model 4: Linear",
                 f"₹{pred_4:.2f}L",
-                f"{((pred_4-current_price)/current_price)*100:.1f}% growth",
-                label_visibility="visible"
+                f"{((pred_4-current_price)/current_price)*100:.1f}% growth"
             )
         
         with col_r2:
@@ -375,8 +415,7 @@ if page == "🔮 Property Prediction":
             st.metric(
                 "Model 5: Random Forest",
                 f"₹{pred_5:.2f}L",
-                f"{((pred_5-current_price)/current_price)*100:.1f}% growth",
-                label_visibility="visible"
+                f"{((pred_5-current_price)/current_price)*100:.1f}% growth"
             )
         
         with col_r3:
@@ -384,14 +423,13 @@ if page == "🔮 Property Prediction":
             st.metric(
                 "Model 6: XGBoost ⭐",
                 f"₹{pred_6:.2f}L",
-                f"{((pred_6-current_price)/current_price)*100:.1f}% growth",
-                label_visibility="visible"
+                f"{((pred_6-current_price)/current_price)*100:.1f}% growth"
             )
         
         st.divider()
         
         # Investment analysis
-        st.subheader("🎯 Investment Analysis", divider="orange")
+        st.subheader("🎯 Investment Analysis")
         
         avg_classification = np.mean([pred_1, pred_2, pred_3])
         avg_regression = np.mean([pred_4, pred_5, pred_6])
@@ -425,7 +463,7 @@ if page == "🔮 Property Prediction":
 # ==================== PAGE 2: MODEL COMPARISON ====================
 
 elif page == "📈 Model Comparison":
-    st.subheader("Model Performance Comparison", divider="orange")
+    st.subheader("Model Performance Comparison")
     
     col1, col2 = st.columns(2)
     
@@ -460,7 +498,7 @@ elif page == "📈 Model Comparison":
 # ==================== PAGE 3: ABOUT MODELS ====================
 
 elif page == "ℹ️ About Models":
-    st.subheader("Model Information", divider="orange")
+    st.subheader("Model Information")
     
     st.write("""
     ### 🤖 Classification Models (Investment Quality)
@@ -516,7 +554,7 @@ elif page == "ℹ️ About Models":
 # ==================== PAGE 4: FEATURE GUIDE ====================
 
 elif page == "📋 Feature Guide":
-    st.subheader("Feature Descriptions & Importance", divider="orange")
+    st.subheader("Feature Descriptions & Importance")
     
     features_info = {
         'Feature': [
